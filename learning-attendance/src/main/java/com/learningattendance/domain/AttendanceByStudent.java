@@ -2,10 +2,12 @@ package com.learningattendance.domain;
 
 import java.util.List;
 
+import com.learningattendance.dto.AttendanceDTO;
+
 public class AttendanceByStudent {
   private String fullName;
   private String courseName;
-  private List<Attendance> attendances;
+  private List<AttendanceDTO> attendances;
 
   public String getFullName() {
     return fullName;
@@ -23,11 +25,11 @@ public class AttendanceByStudent {
     this.courseName = courseName;
   }
 
-  public List<Attendance> getAttendances() {
+  public List<AttendanceDTO> getAttendances() {
     return attendances;
   }
 
-  public void setAttendances(List<Attendance> attendances) {
+  public void setAttendances(List<AttendanceDTO> attendances) {
     this.attendances = attendances;
   }
 

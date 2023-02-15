@@ -13,6 +13,6 @@ import com.learningattendance.domain.AttendanceByStudent;
 public class GetAttendancesByStudentController {
   @GetMapping("/student/{studentId}/attendances")
   public ResponseEntity<AttendanceByStudent> getAttendances(@PathVariable("studentId") String id) {
-    
+    return new ResponseEntity<AttendanceByStudent>(new AttendanceByStudent(), null);
   }
 }
