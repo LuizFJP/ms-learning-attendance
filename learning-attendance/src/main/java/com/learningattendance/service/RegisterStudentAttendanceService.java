@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.learningattendance.domain.Attendance;
 import com.learningattendance.dto.CreatedStudentEventDTO;
 import com.learningattendance.dto.RegisterRequestDTO;
+import com.learningattendance.exception.CourseDoesNotMatchException;
 import com.learningattendance.exception.StudentNotFoundException;
 
 import java.util.Collection;
@@ -20,6 +21,7 @@ public class RegisterStudentAttendanceService {
   RedissonClient redissonClient;
 
   private final String ATTENDANCE_KEY = "attendance";
+  private final String STUDENT_KEY = "student";
 
   public void studentExists(CreatedStudentEventDTO student) {
     CreatedStudentEventDTO studentRetrived = getStudent(student.getStudentId());
@@ -31,17 +33,11 @@ public class RegisterStudentAttendanceService {
   public void courseMatch(CreatedStudentEventDTO student) {
     CreatedStudentEventDTO studentRetrived = getStudent(student.getStudentId());
     if (studentRetrived.courseIsDifferent(student.getCourseId())) {
-      throw new StudentNotFoundException();
+      throw new CourseDoesNotMatchException();
     }
   }
 
   public void register(RegisterRequestDTO request) {
-    // RMap<UUID, CreatedStudentEventDTO> studentHash =
-    // redissonClient.getMap("student");
-    // var student = new
-    // CreatedStudentEventDTO(UUID.fromString("e19fc3b0-a710-4529-9256-426486cfaf04"),
-    // "Luiz Portela", UUID.fromString("b54efb55-4909-42d5-96ad-4fe657097db7"));
-    // studentHash.put(student.getStudentId(), student);
     RMap<UUID, Attendance> attendanceHash = redissonClient.getMap(ATTENDANCE_KEY);
     var attendance = new Attendance(request);
     attendanceHash.put(attendance.getAttendanceId(), attendance);
@@ -50,7 +46,9 @@ public class RegisterStudentAttendanceService {
   }
 
   private CreatedStudentEventDTO getStudent(UUID studentId) {
-    RMap<UUID, CreatedStudentEventDTO> studentHash = redissonClient.getMap("student");
+    RMap<UUID, CreatedStudentEventDTO> studentHash = redissonClient.getMap(STUDENT_KEY);
+    redissonClient.shutdown();
+
     return studentHash.get(studentId);
   }
 
