@@ -25,6 +25,8 @@ public class RegisterStudentAttendanceController {
   @PathVariable("courseId") UUID courseId,
   @PathVariable("studentId") UUID studentId) {
     var registerDTO = new RegisterRequestDTO(courseId, studentId, attendanceStatus);
+    registerService.studentExists(registerDTO);
+    registerService.courseMatch(registerDTO);
     registerService.register(registerDTO);
   }
 }

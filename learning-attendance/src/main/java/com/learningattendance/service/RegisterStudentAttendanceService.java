@@ -23,14 +23,14 @@ public class RegisterStudentAttendanceService {
   private final String ATTENDANCE_KEY = "attendance";
   private final String STUDENT_KEY = "student";
 
-  public void studentExists(CreatedStudentEventDTO student) {
+  public void studentExists(RegisterRequestDTO student) {
     CreatedStudentEventDTO studentRetrived = getStudent(student.getStudentId());
     if (studentRetrived == null) {
       throw new StudentNotFoundException();
     }
   }
 
-  public void courseMatch(CreatedStudentEventDTO student) {
+  public void courseMatch(RegisterRequestDTO student) {
     CreatedStudentEventDTO studentRetrived = getStudent(student.getStudentId());
     if (studentRetrived.courseIsDifferent(student.getCourseId())) {
       throw new CourseDoesNotMatchException();
