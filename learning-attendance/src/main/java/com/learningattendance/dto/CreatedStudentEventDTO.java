@@ -7,6 +7,14 @@ public class CreatedStudentEventDTO {
   private String fullName;
   private UUID courseId;
 
+  public CreatedStudentEventDTO(){}
+
+  public CreatedStudentEventDTO(UUID _studentId, String _fullName, UUID _courseId) {
+    studentId = _studentId;
+    fullName = _fullName;
+    courseId = _courseId;
+  }
+  
   public UUID getStudentId() {
     return studentId;
   }
@@ -29,6 +37,10 @@ public class CreatedStudentEventDTO {
 
   public void setCourseId(UUID courseId) {
     this.courseId = courseId;
+  }
+
+  public boolean courseIsDifferent(UUID _courseId) {
+    return !courseId.equals(_courseId);
   }
 
 }
