@@ -6,11 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learningattendance.domain.AttendanceByStudent;
+
 @RestController
 @RequestMapping("/api/v1")
 public class GetAttendancesByStudentController {
   @GetMapping("/student/{studentId}/attendances")
-  public ResponseEntity<Object> getAttendances(@PathVariable("studentId") String id) {
+  public ResponseEntity<AttendanceByStudent> getAttendances(@PathVariable("studentId") String id) {
     
   }
 }
