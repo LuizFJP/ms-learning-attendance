@@ -42,12 +42,10 @@ public class RegisterStudentAttendanceService {
     var attendance = new Attendance(request);
     attendanceHash.put(attendance.getAttendanceId(), attendance);
 
-    redissonClient.shutdown();
   }
 
   private CreatedStudentEventDTO getStudent(UUID studentId) {
     RMap<UUID, CreatedStudentEventDTO> studentHash = redissonClient.getMap(STUDENT_KEY);
-    redissonClient.shutdown();
 
     return studentHash.get(studentId);
   }

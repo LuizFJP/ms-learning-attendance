@@ -18,7 +18,6 @@ import java.util.UUID;
 public class RegisterStudentAttendanceController {
   @Autowired
   RegisterStudentAttendanceService registerService;
-
   @PostMapping("/course/{courseId}/student/{studentId}/attendance")
   public void create(
   @RequestBody AttendanceStatusDTO attendanceStatus,
