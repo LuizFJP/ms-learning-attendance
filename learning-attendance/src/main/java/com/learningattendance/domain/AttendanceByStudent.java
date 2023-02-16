@@ -9,6 +9,14 @@ public class AttendanceByStudent {
   private String courseName;
   private List<AttendanceDTO> attendances;
 
+  
+
+  public AttendanceByStudent(String fullName, String courseName, List<AttendanceDTO> attendances) {
+    this.fullName = fullName;
+    this.courseName = courseName;
+    this.attendances = attendances;
+  }
+
   public String getFullName() {
     return fullName;
   }
