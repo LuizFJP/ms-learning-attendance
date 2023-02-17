@@ -1,8 +1,9 @@
 package com.learningattendance.dto;
 
 import java.util.UUID;
+import java.io.Serializable;
 
-public class CreatedStudentEventDTO {
+public class CreatedStudentEventDTO implements Serializable{
   private UUID studentId;
   private String fullName;
   private UUID courseId;

@@ -23,4 +23,9 @@ public class StudentRepository {
 
     return studentHash.get(studentId);
   }
+
+  public void save(CreatedStudentEventDTO student) {
+    RMap<UUID, CreatedStudentEventDTO> studentHash = redissonClient.getMap(STUDENT_KEY);
+    studentHash.put(student.getStudentId(), student);
+  }
 }
